@@ -1,0 +1,27 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+
+import "./NavLinks.css";
+
+const NavLinks = (props) => {
+  return (
+    <ul className="nav-links">
+      <li>
+        <NavLink to="/" exact>
+          ALL PARTIES
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/p1/videos">PARTY VIDEO</NavLink>
+      </li>
+      <li>
+        <NavLink to="/videos/new">ADD VIDEO</NavLink>
+      </li>
+      <li>
+        <NavLink to="/auth">AUTHENTICATION</NavLink>
+      </li>
+    </ul>
+  );
+};
+
+export default NavLinks;

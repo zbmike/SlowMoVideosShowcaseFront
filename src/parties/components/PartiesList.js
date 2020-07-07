@@ -1,13 +1,16 @@
 import React from "react";
 
 import PartyItem from "./PartyItem";
+import Card from "../../shared/components/UIElements/Card";
 import "./PartiesList.css";
 
 const PartiesList = (props) => {
   if (props.items.length === 0) {
     return (
       <div classname="center">
-        <h2>No parties found.</h2>
+        <Card>
+          <h2>No parties found.</h2>
+        </Card>
       </div>
     );
   }
