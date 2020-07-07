@@ -13,7 +13,7 @@ const Parties = () => {
     },
   ];
 
-  return <PartiesList />;
+  return <PartiesList items={PARTIES} />;
 };
 
 export default Parties;

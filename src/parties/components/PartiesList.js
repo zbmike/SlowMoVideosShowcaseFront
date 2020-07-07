@@ -13,7 +13,7 @@ const PartiesList = (props) => {
   }
 
   return (
-    <ul>
+    <ul className="parties-list">
       {props.items.map((party) => {
         return (
           <PartyItem
