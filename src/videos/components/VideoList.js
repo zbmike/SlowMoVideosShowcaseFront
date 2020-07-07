@@ -17,15 +17,15 @@ const VideoList = (props) => {
   }
   return (
     <ul className="video-list">
-      {props.items.map((video) => {
+      {props.items.map((video) => (
         <VideoItem
           key={video.id}
           id={video.id}
           image={video.thumbnail}
           url={video.url}
           partyId={video.partyId}
-        />;
-      })}
+        />
+      ))}
     </ul>
   );
 };

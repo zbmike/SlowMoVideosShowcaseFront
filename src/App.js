@@ -8,6 +8,7 @@ import {
 
 import Parties from "./parties/pages/Parties";
 import NewVideo from "./videos/pages/newVideo";
+import PartyVideos from "./videos/pages/PartyVideos";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <Parties />
+          </Route>
+          <Route path="/:partyId/videos" exact>
+            <PartyVideos />
           </Route>
           <Route path="/videos/new" exact>
             <NewVideo />
