@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Card from "../../shared/components/UIElements/Card";
 import Button from "../../shared/components/FormElements/Button";
 import Modal from "../../shared/components/UIElements/Modal";
+import Player from "../../shared/components/UIElements/Player";
 import "./VideoItem.css";
 
 const VideoItem = (props) => {
@@ -22,7 +23,11 @@ const VideoItem = (props) => {
         footer={<Button onClick={closePlayerHandler}>CLOSE</Button>}
       >
         <div className="player-container">
-          <h2>The Player</h2>
+          <Player
+            url={props.url}
+            thumbnail={props.thumbnail}
+            className="video-item__player"
+          />
         </div>
       </Modal>
       <li className="video-item">

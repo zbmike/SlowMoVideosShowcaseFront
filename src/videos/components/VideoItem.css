@@ -51,6 +51,8 @@
 .player-container {
   height: 20rem;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 @media (min-width: 768px) {
