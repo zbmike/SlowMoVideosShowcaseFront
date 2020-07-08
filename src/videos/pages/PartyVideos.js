@@ -1,5 +1,6 @@
 import React from "react";
 
+import { useParams } from "react-router-dom";
 import VideoList from "../components/VideoList";
 
 const DUMMY_VIDEO = [
@@ -20,7 +21,11 @@ const DUMMY_VIDEO = [
 ];
 
 const PartyVideos = () => {
-  return <VideoList items={DUMMY_VIDEO} />;
+  const partyId = useParams().partyId;
+  const filteredVideo = DUMMY_VIDEO.filter(
+    (video) => video.partyId === partyId
+  );
+  return <VideoList items={filteredVideo} />;
 };
 
 export default PartyVideos;
