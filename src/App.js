@@ -6,30 +6,67 @@ import {
   Switch,
 } from "react-router-dom";
 
+import Splash from "./splash/pages/Splash";
 import Parties from "./parties/pages/Parties";
-import NewVideo from "./videos/pages/newVideo";
 import PartyVideos from "./videos/pages/PartyVideos";
+import NewParty from "./parties/pages/NewParty";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
+import Auth from "./users/pages/Auth";
+import { AuthContext } from "./shared/context/auth-context";
+import { useAuth } from "./shared/hooks/auth-hook";
 
 function App() {
+  const { token, login, logout, userId } = useAuth();
+
+  let routes;
+
+  if (token) {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <Parties />
+        </Route>
+        <Route path="/:userId/parties" exact>
+          <PartyVideos />
+        </Route>
+        <Route path="/parties/new" exact>
+          <NewParty />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    );
+  } else {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <Splash />
+        </Route>
+        <Route path="/:userId/places" exact>
+          <PartyVideos />
+        </Route>
+        <Route path="/auth">
+          <Auth />
+        </Route>
+        <Redirect to="/auth" />
+      </Switch>
+    );
+  }
+
   return (
-    <Router>
-      <MainNavigation />
-      <main>
-        <Switch>
-          <Route path="/" exact>
-            <Parties />
-          </Route>
-          <Route path="/:partyId/videos" exact>
-            <PartyVideos />
-          </Route>
-          <Route path="/videos/new" exact>
-            <NewVideo />
-          </Route>
-          <Redirect to="/" />
-        </Switch>
-      </main>
-    </Router>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: !!token,
+        token: token,
+        userId: userId,
+        login: login,
+        logout: logout,
+      }}
+    >
+      <Router>
+        <MainNavigation />
+        <main>{routes}</main>
+      </Router>
+    </AuthContext.Provider>
   );
 }
 

@@ -16,7 +16,7 @@ const PartyItem = (props) => {
           <div className="party-item__info">
             <h2>{props.name}</h2>
             <h3>
-              {props.videoCount} {props.placeCount === 1 ? "Video" : "Videos"}
+              {props.videoCount} {props.videoCount === 1 ? "Video" : "Videos"}
             </h3>
           </div>
         </Link>

@@ -31,7 +31,7 @@ const Parties = () => {
           <LoadingSpinner />
         </div>
       )}
-      <PartiesList items={PARTIES} />
+      {!isLoading && loadedParties && <PartiesList items={loadedParties} />}
     </React.Fragment>
   );
 };
