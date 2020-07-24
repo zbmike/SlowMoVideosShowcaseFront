@@ -24,7 +24,7 @@ const PartiesList = (props) => {
             id={party.id}
             image={party.image}
             name={party.name}
-            videoCount={party.videos}
+            videoCount={party.videos.length}
           />
         );
       })}

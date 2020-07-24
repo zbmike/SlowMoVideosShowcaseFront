@@ -1,19 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import PartiesList from "../components/PartiesList";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import { useHttpClient } from "../../shared/hooks/http-hook";
 
 const Parties = () => {
-  const PARTIES = [
-    {
-      id: "p1",
-      name: "Andy&Mai's Wedding",
-      image:
-        "https://images.ctfassets.net/77l22z9el0aa/68X8glzRII6myuoYsI6E0S/02ceb485340fcf2ea2227e99b164be21/3963534.jpg?fm=jpg&fl=progressive&q=75&w=2000",
-      videos: 3,
-    },
-  ];
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [loadedParties, setloadedParties] = useState();
 
-  return <PartiesList items={PARTIES} />;
+  // like componentWillMount
+  useEffect(() => {
+    const fetchParties = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/parties"
+        );
+
+        setloadedParties(responseData.parties);
+      } catch (err) {}
+    };
+    fetchParties();
+  }, [sendRequest]);
+
+  return (
+    <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && (
+        <div className="center">
+          <LoadingSpinner />
+        </div>
+      )}
+      <PartiesList items={PARTIES} />
+    </React.Fragment>
+  );
 };
 
 export default Parties;
