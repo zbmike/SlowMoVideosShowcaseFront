@@ -40,7 +40,6 @@ const Auth = () => {
         {
           ...formState.inputs,
           name: undefined,
-          image: undefined,
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
@@ -50,10 +49,6 @@ const Auth = () => {
           ...formState.inputs,
           name: {
             value: "",
-            isValid: false,
-          },
-          image: {
-            value: null,
             isValid: false,
           },
         },
@@ -87,11 +82,18 @@ const Auth = () => {
         formData.append("email", formState.inputs.email.value);
         formData.append("name", formState.inputs.name.value);
         formData.append("password", formState.inputs.password.value);
-        formData.append("image", formState.inputs.image.value);
+
         const responseData = await sendRequest(
           "http://localhost:5000/api/users/signup",
           "POST",
-          formData
+          JSON.stringify({
+            name: formState.inputs.name.value,
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
         );
 
         auth.login(responseData.userId, responseData.token);

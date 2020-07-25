@@ -23,16 +23,13 @@ function App() {
   if (token) {
     routes = (
       <Switch>
-        <Route path="/" exact>
-          <Parties />
-        </Route>
         <Route path="/:userId/parties" exact>
-          <PartyVideos />
+          <Parties />
         </Route>
         <Route path="/parties/new" exact>
           <NewParty />
         </Route>
-        <Redirect to="/" />
+        <Redirect to={`/${userId}/parties`} />
       </Switch>
     );
   } else {
