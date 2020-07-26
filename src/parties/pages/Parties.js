@@ -16,8 +16,9 @@ const Parties = () => {
   useEffect(() => {
     const fetchParties = async () => {
       try {
+        console.log(process.env.REACT_APP_BACKEND_URL);
         const responseData = await sendRequest(
-          `http://localhost:5000/api/parties/user/${auth.userId}`,
+          process.env.REACT_APP_BACKEND_URL + `/parties/user/${auth.userId}`,
           "GET",
           null,
           {

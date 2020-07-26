@@ -37,10 +37,15 @@ const NewParty = () => {
       const formData = new FormData();
       formData.append("name", formState.inputs.name.value);
       formData.append("image", formState.inputs.image.value);
-      await sendRequest("http://localhost:5000/api/parties", "POST", formData, {
-        Authorization: "Bearer " + auth.token,
-        // "Content-Type": "multipart/form-data",
-      });
+      await sendRequest(
+        process.env.REACT_APP_BACKEND_URL + "/parties",
+        "POST",
+        formData,
+        {
+          Authorization: "Bearer " + auth.token,
+          // "Content-Type": "multipart/form-data",
+        }
+      );
       history.push("/");
     } catch (err) {}
   };

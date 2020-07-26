@@ -19,7 +19,7 @@ const PartyVideos = () => {
     const fetchVideos = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/videos/party/${partyId}`,
+          process.env.REACT_APP_BACKEND_URL + `/videos/party/${partyId}`,
           "GET",
           null,
           {

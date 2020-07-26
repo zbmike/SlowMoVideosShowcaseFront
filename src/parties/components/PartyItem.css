@@ -20,7 +20,7 @@
   background: #ffd900;
 }
 
-.party-item__content {
+.card.party-item__content {
   padding: 0;
 }
 

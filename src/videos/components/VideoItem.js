@@ -32,7 +32,7 @@ const VideoItem = (props) => {
     try {
       console.log(props.id);
       await sendRequest(
-        `http://localhost:5000/api/videos/${props.id}`,
+        process.env.REACT_APP_BACKEND_URL + `/videos/${props.id}`,
         "DELETE",
         null,
         {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,14 +7,21 @@ import {
 } from "react-router-dom";
 
 import Splash from "./splash/pages/Splash";
-import Parties from "./parties/pages/Parties";
-import PartyVideos from "./videos/pages/PartyVideos";
-import NewParty from "./parties/pages/NewParty";
-import NewVideo from "./videos/pages/NewVideo";
+// import Parties from "./parties/pages/Parties";
+// import PartyVideos from "./videos/pages/PartyVideos";
+// import NewParty from "./parties/pages/NewParty";
+// import NewVideo from "./videos/pages/NewVideo";
+// import Auth from "./users/pages/Auth";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
-import Auth from "./users/pages/Auth";
 import { AuthContext } from "./shared/context/auth-context";
 import { useAuth } from "./shared/hooks/auth-hook";
+import LoadingSpinner from "./shared/components/UIElements/LoadingSpinner";
+
+const Parties = React.lazy(() => import("./parties/pages/Parties"));
+const PartyVideos = React.lazy(() => import("./videos/pages/PartyVideos"));
+const NewParty = React.lazy(() => import("./parties/pages/NewParty"));
+const NewVideo = React.lazy(() => import("./videos/pages/NewVideo"));
+const Auth = React.lazy(() => import("./users/pages/Auth"));
 
 function App() {
   const { token, login, logout, userId } = useAuth();
@@ -65,7 +72,17 @@ function App() {
     >
       <Router>
         <MainNavigation />
-        <main>{routes}</main>
+        <main>
+          <Suspense
+            fallback={
+              <div className="center">
+                <LoadingSpinner />
+              </div>
+            }
+          >
+            {routes}
+          </Suspense>
+        </main>
       </Router>
     </AuthContext.Provider>
   );

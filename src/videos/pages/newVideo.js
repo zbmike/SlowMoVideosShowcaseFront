@@ -33,7 +33,7 @@ const NewParty = () => {
       const formData = new FormData();
       formData.append("video", formState.inputs.video.value);
       await sendRequest(
-        `http://localhost:5000/api/videos/party/${partyId}`,
+        process.env.REACT_APP_BACKEND_URL + `/videos/party/${partyId}`,
         "POST",
         formData,
         {
