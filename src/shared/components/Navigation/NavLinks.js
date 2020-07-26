@@ -9,13 +9,13 @@ const NavLinks = (props) => {
 
   return (
     <ul className="nav-links">
-      {!auth.isLoggedIn && (
+      {/* {!auth.isLoggedIn && (
         <li>
           <NavLink to="/" exact>
             SPLASH
           </NavLink>
         </li>
-      )}
+      )} */}
       {auth.isLoggedIn && (
         <li>
           <NavLink to={`/${auth.userId}/parties`}>MY PARTIES</NavLink>
