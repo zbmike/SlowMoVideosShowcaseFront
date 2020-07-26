@@ -21,3 +21,9 @@
   height: 100%;
   object-fit: cover;
 }
+
+.image-upload__preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

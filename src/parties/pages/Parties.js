@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 import PartiesList from "../components/PartiesList";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
@@ -12,14 +12,12 @@ const Parties = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [loadedParties, setloadedParties] = useState();
 
-  const userId = useParams().userId;
-
   // like componentWillMount
   useEffect(() => {
     const fetchParties = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/parties/user/${userId}`,
+          `http://localhost:5000/api/parties/user/${auth.userId}`,
           "GET",
           null,
           {
@@ -30,8 +28,10 @@ const Parties = () => {
         setloadedParties(responseData.parties);
       } catch (err) {}
     };
-    fetchParties();
-  }, [sendRequest, userId, auth.token]);
+    if (auth.userId) {
+      fetchParties();
+    }
+  }, [sendRequest, auth.token, auth.userId]);
 
   return (
     <React.Fragment>

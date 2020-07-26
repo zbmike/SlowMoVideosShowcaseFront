@@ -7,7 +7,6 @@ const Player = (props) => {
     <video
       controls
       src={props.url}
-      poster={props.thumbnail}
       className={`player ${props.className}`}
     ></video>
   );

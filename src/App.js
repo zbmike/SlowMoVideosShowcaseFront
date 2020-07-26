@@ -10,6 +10,7 @@ import Splash from "./splash/pages/Splash";
 import Parties from "./parties/pages/Parties";
 import PartyVideos from "./videos/pages/PartyVideos";
 import NewParty from "./parties/pages/NewParty";
+import NewVideo from "./videos/pages/NewVideo";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import Auth from "./users/pages/Auth";
 import { AuthContext } from "./shared/context/auth-context";
@@ -29,6 +30,12 @@ function App() {
         <Route path="/parties/new" exact>
           <NewParty />
         </Route>
+        <Route path="/:partyId/videos" exact>
+          <PartyVideos />
+        </Route>
+        <Route path="/:partyId/videos/new" exact>
+          <NewVideo />
+        </Route>
         <Redirect to={`/${userId}/parties`} />
       </Switch>
     );
@@ -38,13 +45,10 @@ function App() {
         <Route path="/" exact>
           <Splash />
         </Route>
-        <Route path="/:userId/places" exact>
-          <PartyVideos />
-        </Route>
         <Route path="/auth">
           <Auth />
         </Route>
-        <Redirect to="/auth" />
+        <Redirect to="/" />
       </Switch>
     );
   }
